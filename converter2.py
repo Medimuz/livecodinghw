@@ -1,4 +1,6 @@
 from onlinerequests import CURRENCIES
+
+
 def convert():
     while True:
         user_currency = input("Введите имеющуюся валюту: ")
@@ -11,7 +13,8 @@ def convert():
             if current_amount <= 0:
                 print('Число должно быть больше 0!')
                 continue
-            else: break
+            else:
+                break
 
         while True:
             conversion_currency = input('Выберите валюту для конвертации: ')
@@ -24,9 +27,10 @@ def convert():
 
         return converted_amount, conversion_currency
 
+
 def main():
     print('Добро пожаловать в конвертер валют')
-    print('-'*34)
+    print('-' * 34)
 
     print('''Наша программа поможет Вам конвертировать валюту.
     1. Введение имеющейся валюты
@@ -42,6 +46,17 @@ def main():
     print('-' * 34)
     result = convert()
     print(f'Итого: {result[0]:.2f} {result[1]}')
+    while True:
+        repeat = input('Желаете продолжить? Напишите "да" или "нет": ').lower()
+        if repeat not in ["да", "нет"]:
+            print('Введите "да" или "нет".')
+            continue
+        elif repeat == "да":
+            main()
+        else:
+            print('До свидания!')
+            break
+
 
 if __name__ == '__main__':
     main()
