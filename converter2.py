@@ -53,9 +53,8 @@ def main():
             continue
         elif repeat == "да":
             main()
-        else:
-            print('До свидания!')
-            break
+        print('До свидания!')
+        break
 
 
 if __name__ == '__main__':
