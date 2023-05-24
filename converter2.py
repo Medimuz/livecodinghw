@@ -24,28 +24,12 @@ def convert():
             else:
                 converted_amount = CURRENCIES.get(conversion_currency) / CURRENCIES.get(user_currency) * current_amount
                 break
+        print(f'Итого: {converted_amount:.2f} {conversion_currency}')
+        break
 
-        return converted_amount, conversion_currency
 
-
-def main():
-    print('Добро пожаловать в конвертер валют')
-    print('-' * 34)
-
-    print('''Наша программа поможет Вам конвертировать валюту.
-    1. Введение имеющейся валюты
-    2. Количество этой валюты
-    3. Выбор валюты для конвертации''')
-    print('-' * 34)
-
-    print('Вам предложены следующие валюты: ')
-    key_counter = 1
-    for key in CURRENCIES:
-        print(f'{key_counter}. {key}')
-        key_counter += 1
-    print('-' * 34)
-    result = convert()
-    print(f'Итого: {result[0]:.2f} {result[1]}')
+def continuation():
+    """Запрос пользователю на продолжение работы"""
     while True:
         repeat = input('Желаете продолжить? Напишите "да" или "нет": ').lower()
         if repeat not in ["да", "нет"]:
@@ -55,6 +39,35 @@ def main():
             main()
         print('До свидания!')
         break
+
+
+def greetings():
+    """Приветствие"""
+    print('Добро пожаловать в конвертер валют')
+    print('-' * 34)
+
+    print('''Наша программа поможет Вам конвертировать валюту.
+        1. Введение имеющейся валюты
+        2. Количество этой валюты
+        3. Выбор валюты для конвертации''')
+    print('-' * 34)
+
+
+def currencies_to_choose():
+    """Вывод списка достуаных валют"""
+    print('Вам предложены следующие валюты: ')
+    key_counter = 1
+    for key in CURRENCIES:
+        print(f'{key_counter}. {key}')
+        key_counter += 1
+    print('-' * 34)
+
+
+def main():
+    greetings()
+    currencies_to_choose()
+    convert()
+    continuation()
 
 
 if __name__ == '__main__':
