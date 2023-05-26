@@ -2,60 +2,71 @@ from onlinerequests import CURRENCIES
 
 
 def convert():
+    """Функиия конвертации"""
     while True:
         user_currency = input("Введите имеющуюся валюту: ")
-        if user_currency not in CURRENCIES:
+        if user_currency in CURRENCIES:
+            break
+        else:
             print('Такой валюты нет в списке!')
-            continue
 
-        while True:
-            current_amount = float(input('Введите имеющуся сумму: '))
-            if current_amount <= 0:
-                print('Число должно быть больше 0!')
-                continue
-            else:
-                break
+    while True:
+        current_amount = float(input('Введите имеющуся сумму: '))
+        if current_amount > 0:
+            break
+        else:
+            print('Число должно быть больше 0!')
 
-        while True:
-            conversion_currency = input('Выберите валюту для конвертации: ')
-            if conversion_currency not in CURRENCIES:
-                print('Такой валюты нет в списке!')
-                continue
-            else:
-                converted_amount = CURRENCIES.get(conversion_currency) / CURRENCIES.get(user_currency) * current_amount
-                break
-
-        return converted_amount, conversion_currency
+    while True:
+        conversion_currency = input('Выберите валюту для конвертации: ')
+        if conversion_currency in CURRENCIES:
+            converted_amount = CURRENCIES.get(conversion_currency) / CURRENCIES.get(user_currency) * current_amount
+            print(f'Итого: {converted_amount:.2f} {conversion_currency}')
+            break
+        else:
+            print('Такой валюты нет в списке!')
 
 
-def main():
+def continuation():
+    """Запрос пользователю на продолжение работы"""
+    while True:
+        repeat = input('Желаете продолжить? Напишите "да" или "нет": ').lower()
+        if repeat == 'нет':
+            print('До свидания!')
+            break
+        elif repeat == 'да':
+            main()
+        else:
+            print('Введите "да" или "нет"')
+
+
+def greetings():
+    """Приветствие"""
     print('Добро пожаловать в конвертер валют')
     print('-' * 34)
 
     print('''Наша программа поможет Вам конвертировать валюту.
-    1. Введение имеющейся валюты
-    2. Количество этой валюты
-    3. Выбор валюты для конвертации''')
+        1. Введение имеющейся валюты
+        2. Количество этой валюты
+        3. Выбор валюты для конвертации''')
     print('-' * 34)
 
+
+def currencies_to_choose():
+    """Вывод списка достуаных валют"""
     print('Вам предложены следующие валюты: ')
     key_counter = 1
     for key in CURRENCIES:
         print(f'{key_counter}. {key}')
         key_counter += 1
     print('-' * 34)
-    result = convert()
-    print(f'Итого: {result[0]:.2f} {result[1]}')
-    while True:
-        repeat = input('Желаете продолжить? Напишите "да" или "нет": ').lower()
-        if repeat not in ["да", "нет"]:
-            print('Введите "да" или "нет".')
-            continue
-        elif repeat == "да":
-            main()
-        else:
-            print('До свидания!')
-            break
+
+
+def main():
+    greetings()
+    currencies_to_choose()
+    convert()
+    continuation()
 
 
 if __name__ == '__main__':

@@ -7,5 +7,3 @@ HOST = f'https://api.freecurrencyapi.com/v1/latest?apikey={API}&currencies=EUR%2
 response = requests.get(HOST)
 
 CURRENCIES = response.json()['data']
-
-
