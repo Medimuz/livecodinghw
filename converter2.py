@@ -15,6 +15,7 @@ def convert_currecies(currency, amount):
 
 
 def users_input():
+    """Функиця ввода данных от пользователя"""
     while True:
         user_currency = input("Введите имеющуюся валюту: ")
         if user_currency in CURRENCIES:
@@ -28,7 +29,7 @@ def users_input():
                 break
             else:
                 print('Число должно быть больше 0!')
-        except:
+        except TypeError:
             print('Нужно ввести число!')
     convert_currecies(user_currency, current_amount)
 
